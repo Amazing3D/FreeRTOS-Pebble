@@ -21,31 +21,8 @@ The firmware is based on FreeRTOS, and aims to be binary-compatible with applica
 |Vibrate:         |N                |Y                       |Y            |N              |
 |Backlight:       |N                |Y                       |Y            |N              |
 |Power Management:|N                |N                       |N            |N              |
-|Bluetooth:       |N                |Y                       |N            |N              |
+|Bluetooth:       |N                |Y (Alpha)               |N            |N              |
 |Overall (%):     |1%               |20%                     |10%          |0%             |
-
-## Roadmap
-list of outstanding tasks grouped into "starter" down to "hardcore"
-- convert resource loading to use fs.c
-- implement Silk
-- clean up tintin hardware drivers.
-- split tintin into a nicer platform.
-##### [PR]
-- fix build warnings
-- fix vibrate
-- tie vibrate in
-- flash write
-- app loader refinement
-##### [IN PROGRESS]
-- music app
-- music protocol api
-- phone notification layout
-- notification gui
-##### [DONE]
-- app loading/ watchface loading differentiation
-- background workers
-- PDC drawing doesn't layer offset
-- lots of unalloc functions (see matrix)
 
 ## FAQ
 
@@ -146,10 +123,11 @@ system applications.  We break down these components as follows:
 logging:
 - DRV_LOG for hw
 - KERN_LOG for rcore drivers
-- SYS_LOG for rcore processes
+- SYS_LOG for rcore/rwatch processes
 - APP_LOG is automatic for apps(edited)
 
 No style wars.
+
 Do what's best.
 
 ## Reuse and contact
