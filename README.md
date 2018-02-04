@@ -1,15 +1,81 @@
 # RebbleOS
 
-RebbleOS is an open-source reimplementation of the firmware for the devices
-formerly manufactured by Pebble Technologies, Inc.  The firmware is based on
-FreeRTOS, and aims to be binary-compatible with applications that were
-written for the original Pebble OS, as well as radio-compatible with
-smartphone applications that are designed to work with Pebble.
+RebbleOS is an open-source reimplementation of the firmware for the devices formerly manufactured by Pebble Technologies, Inc.
+The firmware is based on FreeRTOS, and aims to be binary-compatible with applications that were written for the original Pebble OS, as well as radio-compatible with smartphone applications that are designed to work with Pebble.
+
+#### Links
+
+- https://github.com/ginge/FreeRTOS-Pebble
+- https://github.com/pebble-dev/wiki/wiki
+- https://github.com/pebble-dev/RebbleOS/issues
+
+## Supported Feature Matrix
+
+|Feature          |TinTin (Pebble 1)|Snowy (Time, Time Steel)|Chalk (Round)|Silk (Pebble 2)|
+|:---:            |:---:            |:---:                   |:---:        |:---:          |
+|Display:         |N                |Y                       |N            |N              |
+|Flash:           |Y                |Y                       |Y            |N              |
+|Buttons:         |Y                |Y                       |Y            |N              |
+|Gyro:            |N                |N                       |N            |N              |
+|Magnetometer:    |N                |N                       |N            |N              |
+|Vibrate:         |N                |Y                       |Y            |N              |
+|Backlight:       |N                |Y                       |Y            |N              |
+|Power Management:|N                |N                       |N            |N              |
+|Bluetooth:       |N                |Y                       |N            |N              |
+|Overall (%):     |1%               |20%                     |10%          |0%             |
+
+## Roadmap
+list of outstanding tasks grouped into "starter" down to "hardcore"
+- convert resource loading to use fs.c
+- implement Silk
+- clean up tintin hardware drivers.
+- split tintin into a nicer platform.
+##### [PR]
+- fix build warnings
+- fix vibrate
+- tie vibrate in
+- flash write
+- app loader refinement
+##### [IN PROGRESS]
+- music app
+- music protocol api
+- phone notification layout
+- notification gui
+##### [DONE]
+- app loading/ watchface loading differentiation
+- background workers
+- PDC drawing doesn't layer offset
+- lots of unalloc functions (see matrix)
+
+## FAQ
+
+**Q: Do you have a list of work to do?**
+
+A. Sadly not yet. Get the code up and running, and see what is obviously missing that you would like to do. Check with the channel first on what we have
+We also have a list of issues https://github.com/pebble-dev/RebbleOS/issues
+
+**Q: Can anyone do this?**
+
+A. Sure. Make a change to the code, docs etc and submit a pull request
+
+**Q: How much works?**
+
+A. Basic hardware and some apps will work ok. Bluetooth is coming along slowly. We are writing the core functions at the moment.
+
+**Q: Can I run it on hardware?**
+
+A. Snowy, yes. But it's experimental and whatnot. Be careful. We are not liable for eaten dogs.
+
+**Q: Where is the FPGA. It complains when I build.**
+
+A. It's pinned in the [Discord](http://discord.gg/aRUAYFN) channel for download. Click the pin icon on the top right and you should see a post with two links to .bin files.
 
 ## Hacking
 
 RebbleOS needs your help! This section discusses what you need to know to
 get started working on the project.
+
+
 
 ### Building
 
@@ -33,7 +99,7 @@ If you wish to build firmware to run on your device, you may also wish to
 consider a script like [buildfw.sh](buildfw.sh). Running RebbleOS on hardware is
 currently out of scope for this document.
 
-> You need the `snowy_fpga.bin` and `chalk_fpga.bin` files to compile on their respective firmwares. They can be found on the `#firmware` channel in the Rebble Discord.
+> You need the `snowy_fpga.bin` and `chalk_fpga.bin` files to compile on their respective firmwares. They can be found on the `#firmware` channel in the [Rebble Discord](http://discord.gg/aRUAYFN).
 
 ### Code structure
 
@@ -75,6 +141,17 @@ system applications.  We break down these components as follows:
 
 * **System applications.** We'll, uh, get there when we have some.  Yeah.
 
+### Code style guide
+
+logging:
+- DRV_LOG for hw
+- KERN_LOG for rcore drivers
+- SYS_LOG for rcore processes
+- APP_LOG is automatic for apps(edited)
+
+No style wars.
+Do what's best.
+
 ## Reuse and contact
 
 RebbleOS is an open-source project licensed (primarily) under a BSD-style
@@ -84,5 +161,5 @@ expected to abide by our code of conduct; for more information on that,
 please see the [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md) file.  Reuse of this project is not only
 permitted, but encouraged!  If you do something cool with RebbleOS, please
 get in touch with us.  The easiest way to do so is through the [Rebble
-Discord server](https://discordapp.com/invite/aRUAYFN), channel #firmware. 
+Discord server](https://discordapp.com/invite/aRUAYFN), channel #firmware.
 We look forward to meeting you!
