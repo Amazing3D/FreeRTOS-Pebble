@@ -124,7 +124,7 @@ logging:
 - DRV_LOG for hw
 - KERN_LOG for rcore drivers
 - SYS_LOG for rcore/rwatch processes
-- APP_LOG is automatic for apps(edited)
+- APP_LOG is for logging from apps, internal or otherwise
 
 No style wars.
 
